@@ -84,6 +84,8 @@ def view_file():
     base_path = os.path.abspath('./files')  # Répertoire sécurisé
     requested_path = os.path.abspath(os.path.join(base_path, filename))
 
+    if not requested_path.startswith(base_path) or not os.path.isfile(requested_path):
+        abort(403)
 
     try:
         with open(requested_path, 'r') as file:
